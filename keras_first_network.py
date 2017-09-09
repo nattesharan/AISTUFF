@@ -33,6 +33,8 @@ print('Completed training ')
 input('Press enter for starting predicions')
 predictions = model.predict(X)
 rounded = [round(x[0]) for x in predictions]
-rounded = numpy.array(rounded)
-predictionScores = model.evaluate(X,rounded)
-print("\n%s: %.2f%%" % (model.metrics_names[1], predictionScores[1]*100))
+print(rounded)
+# for evaluating the accuracy of predictions
+# rounded = numpy.array(rounded)
+# predictionScores = model.evaluate(X,rounded)
+# print("\n%s: %.2f%%" % (model.metrics_names[1], predictionScores[1]*100))
