@@ -1,6 +1,9 @@
 import pandas
 import numpy
 import matplotlib.pyplot as pt
+import math
+from keras.models import Sequential
+from keras.layers import Dense
 numpy.random.seed(7)
 dataframe = pandas.read_csv('international-airline-passengers.csv',usecols=[1],engine='python',skipfooter=3)
 dataset = dataframe.values
@@ -27,3 +30,13 @@ def create_dataset(dataset, look_back = 1):
 look_back = 1
 trainX,trainY = create_dataset(train,look_back)
 testX,testY = create_dataset(test,look_back)
+model = Sequential()
+model.add(Dense(8,input_dim=1,activation='relu'))
+model.add(Dense(1))
+model.compile(loss='mean_squared_error',optimizer='adam')
+model.fit(trainX,trainY,epochs=200,batch_size=2,verbose=2)
+# estimate model performance
+trainScore = model.evaluate(trainX, trainY, verbose=0)
+print('Train Score: %.2f MSE (%.2f RMSE)' % (trainScore, math.sqrt(trainScore)))
+testScore = model.evaluate(testX, testY, verbose=0)
+print('Test Score: %.2f MSE (%.2f RMSE)' % (testScore, math.sqrt(testScore)))
