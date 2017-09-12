@@ -43,3 +43,16 @@ print('Test Score: %.2f MSE (%.2f RMSE)' % (testScore, math.sqrt(testScore)))
 # geneate the predictions
 trainPredictions = model.predict(trainX)
 testPredictions = model.predict(testX)
+# shift train predictions for plotting
+trainPredictPlot = numpy.empty_like(dataset)
+trainPredictPlot[:,:] = numpy.nan
+trainPredictPlot[look_back:len(trainPredictions)+look_back, :] = trainPredictions
+# shift test predictions for plotting
+testPredictPlot = numpy.empty_like(dataset)
+testPredictPlot[:,:] = numpy.nan
+testPredictPlot[len(trainPredictions)+(look_back*2)+1:len(dataset)-1, :] = testPredictions
+#plot baseline and predictions
+pt.plot(dataset)
+pt.plot(trainPredictPlot)
+pt.plot(testPredictPlot)
+pt.show()
