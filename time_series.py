@@ -40,3 +40,6 @@ trainScore = model.evaluate(trainX, trainY, verbose=0)
 print('Train Score: %.2f MSE (%.2f RMSE)' % (trainScore, math.sqrt(trainScore)))
 testScore = model.evaluate(testX, testY, verbose=0)
 print('Test Score: %.2f MSE (%.2f RMSE)' % (testScore, math.sqrt(testScore)))
+# geneate the predictions
+trainPredictions = model.predict(trainX)
+testPredictions = model.predict(testX)
